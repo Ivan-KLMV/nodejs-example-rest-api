@@ -2,7 +2,7 @@ const { Types } = require('mongoose');
 const Contact = require('../../models/contactModel');
 
 /** Перевірка ID перед запитом до сервера */
-exports.checkUserById = async (req, res, next) => {
+exports.checkContactById = async (req, res, next) => {
   try {
     const contactId = req.params.contactId;
 
@@ -17,6 +17,7 @@ exports.checkUserById = async (req, res, next) => {
     if (!contactExists) {
       return res.status(404).json({ message: 'Not found' });
     }
+
     next();
   } catch (error) {
     console.log(error.message);

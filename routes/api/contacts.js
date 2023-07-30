@@ -10,13 +10,13 @@ const {
   updateStatusContact,
 } = require('../../controllers/contacts');
 
-const { checkUserById } = require('../../middleware/contacts');
+const { checkContactById } = require('../../middleware/contacts');
 
 router.get('/', listContacts);
 
 router.post('/', addContact);
 
-router.use('/:contactId', checkUserById);
+router.use('/:contactId', checkContactById);
 
 router.get('/:contactId', getContactById);
 

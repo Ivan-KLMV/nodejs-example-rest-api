@@ -1,5 +1,5 @@
-const { checkUserById } = require('./checkUserById');
+const { checkContactById } = require('./checkContactById');
 
 module.exports = {
-  checkUserById,
+  checkContactById,
 };
