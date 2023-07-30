@@ -1,9 +1,9 @@
 const Contact = require('../../models/contactModel');
-const { userDataValidator } = require('../../utils');
+const { contactDataValidator } = require('../../utils');
 
 exports.addContact = async (req, res) => {
   try {
-    const { error, value } = userDataValidator.validate(req.body);
+    const { error, value } = contactDataValidator.validate(req.body);
 
     if (error) {
       return res.status(400).json({ message: 'missing required name field' });

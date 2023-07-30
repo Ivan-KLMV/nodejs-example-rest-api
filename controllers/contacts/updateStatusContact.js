@@ -1,5 +1,5 @@
 const Contact = require('../../models/contactModel');
-const { userEditDataValidator } = require('../../utils');
+const { contactEditDataValidator } = require('../../utils');
 
 exports.updateStatusContact = async (req, res) => {
   try {
@@ -9,7 +9,7 @@ exports.updateStatusContact = async (req, res) => {
       return res.status(400).json({ message: 'missing field favorite' });
     }
 
-    const { error, value } = userEditDataValidator.validate(req.body);
+    const { error, value } = contactEditDataValidator.validate(req.body);
 
     if (error) {
       return res.status(400).json({ message: 'invalid data' });

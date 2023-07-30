@@ -1,5 +1,5 @@
 const Contact = require('../../models/contactModel');
-const { userEditDataValidator } = require('../../utils');
+const { contactEditDataValidator } = require('../../utils');
 
 exports.updateContact = async (req, res) => {
   try {
@@ -9,27 +9,19 @@ exports.updateContact = async (req, res) => {
       return res.status(400).json({ message: 'missing fields' });
     }
 
-    const { error, value } = userEditDataValidator.validate(req.body);
+    const { error, value } = contactEditDataValidator.validate(req.body);
 
     if (error) {
       return res.status(400).json({ message: 'invalid data' });
     }
 
-    const { name, email, phone } = value;
+    const contact = await Contact.findById(contactId);
 
-    if (name) {
-      await Contact.findByIdAndUpdate(contactId, { name }, { new: true });
-    }
-    if (email) {
-      await Contact.findByIdAndUpdate(contactId, { email }, { new: true });
-    }
-    if (phone) {
-      await Contact.findByIdAndUpdate(contactId, { phone }, { new: true });
-    }
+    Object.keys(value).forEach((key) => (contact[key] = value[key]));
 
-    const updatedUserData = { name, email, phone };
+    const updatedContactData = await contact.save();
 
-    res.status(200).json(updatedUserData);
+    res.status(200).json(updatedContactData);
   } catch (error) {
     res.sendStatus(500);
   }
