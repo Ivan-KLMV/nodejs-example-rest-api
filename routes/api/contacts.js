@@ -16,6 +16,9 @@ const {
   checkContactEditData,
   checkContactStatus,
 } = require('../../middleware/contacts');
+const { authProtect } = require('../../middleware/users');
+
+router.use(authProtect);
 
 router.get('/', listContacts);
 

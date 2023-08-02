@@ -1,6 +1,8 @@
 const User = require('../../models/userModel');
 const jwt = require('jsonwebtoken');
 
+const { SECRET } = require('../../constants/SECRET');
+
 exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -15,12 +17,13 @@ exports.loginUser = async (req, res) => {
     if (!passwordIsValid) {
       return res.status(401).json({ message: 'Email or password is wrong' });
     }
-    const secret = 'PKLG4PCLjg8BQr2FyjtZRanhVl17Q1R0';
+
     const payload = {
       id: user._id,
     };
-    const token = jwt.sign(payload, secret, { expiresIn: '30m' });
+    const token = jwt.sign(payload, SECRET, { expiresIn: '30m' });
 
+    await User.findByIdAndUpdate(user._id, { token });
     res.status(201).json({
       token: token,
       user: { emal: user.email, subscription: user.subscription },

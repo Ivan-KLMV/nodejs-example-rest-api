@@ -1,11 +1,15 @@
 const Contact = require('../../models/contactModel');
 
-exports.listContacts = async (_, res) => {
+exports.listContacts = async (req, res) => {
   try {
-    const contacts = await Contact.find();
+    const { _id: owner } = req.user;
+    const { page = 1, limit = 10 } = req.query;
+    const skip = (page - 1) * limit;
+
+    const contacts = await Contact.find({ owner }).skip(skip).limit(limit);
 
     res.status(200).json(contacts);
   } catch (error) {
-    res.sendStatus(500);
+    res.status(500).json(error.message);
   }
 };
