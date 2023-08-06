@@ -1,21 +1,14 @@
 const Contact = require('../../models/contactModel');
-const { contactEditDataValidator } = require('../../utils');
 
 exports.updateStatusContact = async (req, res) => {
   try {
-    const contactId = req.params.contactId;
+    const { contactId } = req.params;
 
     if (!Object.keys(req.body).length) {
       return res.status(400).json({ message: 'missing field favorite' });
     }
 
-    const { error, value } = contactEditDataValidator.validate(req.body);
-
-    if (error) {
-      return res.status(400).json({ message: 'invalid data' });
-    }
-
-    const { favorite } = value;
+    const { favorite } = req.body;
 
     const updatedUser = await Contact.findByIdAndUpdate(
       contactId,

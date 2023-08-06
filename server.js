@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
 
 const app = require('./app');
-const DB_URL = require('./DB_URL');
+const { DB_URL } = require('./constants/DB_URL');
 
 mongoose
-  .connect(DB_URL)
+  .connect(DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log('Mongo DB successfully connected..');
 

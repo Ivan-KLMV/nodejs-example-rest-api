@@ -1,4 +1,5 @@
 const { tryCatchWrapper } = require('./tryCatchWrapper');
+const { userValidator } = require('./userValidator');
 const {
   contactDataValidator,
   contactEditDataValidator,
@@ -8,4 +9,5 @@ module.exports = {
   contactDataValidator,
   contactEditDataValidator,
   tryCatchWrapper,
+  userValidator,
 };
