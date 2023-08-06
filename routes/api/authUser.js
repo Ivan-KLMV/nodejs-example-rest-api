@@ -10,9 +10,12 @@ const {
   registerUser,
   loginUser,
   logoutUser,
+  changeUserSubscription,
 } = require('../../controllers/users');
 
 const router = Router();
+
+router.patch('/', authProtect, changeUserSubscription);
 
 router.post('/register', checkUserData, checkUserEmail, registerUser);
 

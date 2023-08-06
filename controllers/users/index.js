@@ -1,3 +1,4 @@
+const { changeUserSubscription } = require('./changeUserSubscription');
 const { getMe } = require('./getMe');
 const { loginUser } = require('./loginUser');
 const { logoutUser } = require('./logoutUser');
@@ -8,4 +9,5 @@ module.exports = {
   loginUser,
   logoutUser,
   registerUser,
+  changeUserSubscription,
 };
