@@ -10,8 +10,6 @@ exports.changeUserSubscription = async (req, res) => {
       (item) => item === newSubscription
     );
 
-    console.log('isSubscriptionValid', isSubscriptionValid);
-
     if (!isSubscriptionValid) {
       return res
         .status(400)
