@@ -3,7 +3,7 @@ const User = require('../../models/userModel');
 exports.changeUserSubscription = async (req, res) => {
   try {
     const subscriptionType = ['starter', 'pro', 'business'];
-    const newSubscription = req.body.subscription;
+    const newSubscription = req.body.subscription.trim();
     const { email, subscription } = req.user;
 
     const isSubscriptionValid = subscriptionType.some(
