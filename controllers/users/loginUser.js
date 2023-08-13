@@ -26,7 +26,7 @@ exports.loginUser = async (req, res) => {
     await User.findByIdAndUpdate(user._id, { token });
     res.status(200).json({
       token: token,
-      user: { emal: user.email, subscription: user.subscription },
+      user: { email: user.email, subscription: user.subscription },
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

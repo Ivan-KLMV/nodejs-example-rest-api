@@ -10,13 +10,13 @@ mongoose
   })
   .then(() => {
     console.log('Mongo DB successfully connected..');
-
-    app.listen(3000, () => {
-      console.log('Server running. Use our API on port: 3000');
-    });
   })
   .catch((err) => {
     console.log(err);
 
     process.exit(1);
   });
+
+module.exports = app.listen(3000, () => {
+  console.log('Server running. Use our API on port: 3000');
+});
