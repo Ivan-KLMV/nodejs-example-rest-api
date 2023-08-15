@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const { EMAIL_REGEXP } = require('../constants/EMAIL_REGEXP');
 
-exports.userValidator = Joi.object({
+const userValidator = Joi.object({
   email: Joi.string()
     .pattern(EMAIL_REGEXP)
     .required()
@@ -17,3 +17,14 @@ exports.userValidator = Joi.object({
       },
     }),
 });
+
+const emailValidator = Joi.object({
+  email: Joi.string()
+    .pattern(EMAIL_REGEXP)
+    .required()
+    .options({
+      messages: { 'string.pattern.base': 'Enter a valid email' },
+    }),
+});
+
+module.exports = { userValidator, emailValidator };

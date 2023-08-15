@@ -1,8 +1,11 @@
+const { nanoid } = require('nanoid');
 const User = require('../../models/userModel');
 
 exports.registerUser = async (req, res) => {
   try {
-    const newUser = await User.create(req.body);
+    const verificationToken = nanoid();
+    console.log(verificationToken);
+    const newUser = await User.create({ ...req.body, verificationToken });
     newUser.password = undefined;
 
     res.status(201).json({

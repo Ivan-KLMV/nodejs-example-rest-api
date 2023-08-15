@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const gravatar = require('gravatar');
 
 const { EMAIL_REGEXP } = require('../constants/EMAIL_REGEXP');
 
@@ -21,6 +22,15 @@ const userSchema = new Schema(
       default: 'starter',
     },
     token: String,
+    avatarURL: String,
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      type: String,
+      required: [true, 'Verify token is required'],
+    },
   },
   { timestamps: true, versionKey: false }
 );
@@ -28,6 +38,17 @@ const userSchema = new Schema(
 /**
  * Pre save mongoose hook. Fires on Create and Save. */
 userSchema.pre('save', async function (next) {
+  if (this.isNew) {
+    this.avatarURL = gravatar.url(
+      this.email,
+      {
+        s: '250',
+        d: 'robohash',
+      },
+      true
+    );
+  }
+
   if (!this.isModified('password')) {
     return next();
   }

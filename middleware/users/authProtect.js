@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const { SECRET } = require('../../constants/SECRET');
+const { JWT_SECRET } = process.env;
 const User = require('../../models/userModel');
 
 exports.authProtect = async (req, res, next) => {
@@ -14,7 +14,7 @@ exports.authProtect = async (req, res, next) => {
   }
 
   try {
-    const { id } = jwt.verify(token, SECRET);
+    const { id } = jwt.verify(token, JWT_SECRET);
     const user = await User.findById(id);
 
     if (!user || !user.token || user.token !== token) {

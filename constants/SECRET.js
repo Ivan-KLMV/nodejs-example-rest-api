@@ -1,1 +1,0 @@
-exports.SECRET = 'PKLG4PCLjg8BQr2FyjtZRanhVl17Q1R0';

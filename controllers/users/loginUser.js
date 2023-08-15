@@ -1,7 +1,7 @@
 const User = require('../../models/userModel');
 const jwt = require('jsonwebtoken');
 
-const { SECRET } = require('../../constants/SECRET');
+const { JWT_SECRET } = process.env;
 
 exports.loginUser = async (req, res) => {
   try {
@@ -21,12 +21,12 @@ exports.loginUser = async (req, res) => {
     const payload = {
       id: user._id,
     };
-    const token = jwt.sign(payload, SECRET, { expiresIn: '1d' });
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' });
 
     await User.findByIdAndUpdate(user._id, { token });
-    res.status(201).json({
+    res.status(200).json({
       token: token,
-      user: { emal: user.email, subscription: user.subscription },
+      user: { email: user.email, subscription: user.subscription },
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
