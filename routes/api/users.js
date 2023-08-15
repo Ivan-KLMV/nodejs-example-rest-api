@@ -21,6 +21,8 @@ router.patch('/', authProtect, changeUserSubscription);
 
 router.post('/register', checkUserData, checkUserEmail, registerUser);
 
+router.get('/users/verify/:verificationToken');
+
 router.post('/login', checkUserData, loginUser);
 
 router.get('/current', authProtect, getMe);
