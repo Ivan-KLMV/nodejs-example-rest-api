@@ -12,6 +12,10 @@ exports.loginUser = async (req, res) => {
       return res.status(401).json({ message: 'Email or password is wrong' });
     }
 
+    if (!user.verify) {
+      return res.status(401).json({ message: 'Email not verified' });
+    }
+
     const passwordIsValid = await user.checkPassword(password, user.password);
 
     if (!passwordIsValid) {
@@ -24,6 +28,7 @@ exports.loginUser = async (req, res) => {
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' });
 
     await User.findByIdAndUpdate(user._id, { token });
+
     res.status(200).json({
       token: token,
       user: { email: user.email, subscription: user.subscription },
