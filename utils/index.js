@@ -1,6 +1,7 @@
 const { tryCatchWrapper } = require('./tryCatchWrapper');
 const { userValidator, emailValidator } = require('./userValidator');
 const { jimpImgConverter } = require('./jimpImgConverter');
+const { emailSender } = require('./emailSender');
 const {
   contactDataValidator,
   contactEditDataValidator,
@@ -13,4 +14,5 @@ module.exports = {
   tryCatchWrapper,
   userValidator,
   jimpImgConverter,
+  emailSender,
 };

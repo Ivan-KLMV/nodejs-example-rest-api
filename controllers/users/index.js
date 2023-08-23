@@ -4,6 +4,8 @@ const { loginUser } = require('./loginUser');
 const { logoutUser } = require('./logoutUser');
 const { registerUser } = require('./registerUser');
 const { updateUserAvatar } = require('./updateUserAvatar');
+const { verifyEmail } = require('./verifyEmail');
+const { resendVerifyEmail } = require('./resendVerifyEmail');
 
 module.exports = {
   getMe,
@@ -12,4 +14,6 @@ module.exports = {
   registerUser,
   changeUserSubscription,
   updateUserAvatar,
+  verifyEmail,
+  resendVerifyEmail,
 };

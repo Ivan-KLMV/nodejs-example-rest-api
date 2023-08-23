@@ -4,6 +4,7 @@ const {
   checkUserData,
   checkUserEmail,
   authProtect,
+  checkEmail,
 } = require('../../middleware/users');
 const {
   getMe,
@@ -12,6 +13,8 @@ const {
   logoutUser,
   changeUserSubscription,
   updateUserAvatar,
+  verifyEmail,
+  resendVerifyEmail,
 } = require('../../controllers/users');
 const { uploadFile } = require('../../middleware/users/uploadFile');
 
@@ -21,7 +24,9 @@ router.patch('/', authProtect, changeUserSubscription);
 
 router.post('/register', checkUserData, checkUserEmail, registerUser);
 
-router.get('/users/verify/:verificationToken');
+router.get('/verify/:verificationToken', verifyEmail);
+
+router.post('/verify', checkEmail, resendVerifyEmail);
 
 router.post('/login', checkUserData, loginUser);
 
